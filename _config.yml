@@ -1,0 +1,4 @@
+# Jeckyll configurations
+
+theme: jekyll-theme-cayman
+markdown: kramdown
