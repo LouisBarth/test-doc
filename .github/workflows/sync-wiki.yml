@@ -21,6 +21,12 @@ jobs:
         git clone "https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
         rsync -av --delete docs/ wiki/ # Syncs all files from /docs to the wiki directory
 
+    - name: Configure Git author
+      run: |
+        cd wiki
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git config user.name "GitHub Actions Bot"
+
     - name: Commit and push changes
       run: |
         cd wiki
