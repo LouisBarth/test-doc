@@ -15,6 +15,11 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Set up Node.js (if needed)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
     - name: Copy docs to Wiki directory
       run: |
         rm -rf wiki
