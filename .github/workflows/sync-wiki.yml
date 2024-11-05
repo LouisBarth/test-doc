@@ -28,7 +28,7 @@ jobs:
     # Step 3: Copy files from the /docs folder in main repository to wiki repository
     - name: Sync /docs folder to Wiki repository
       run: |
-        rsync -av --delete main_repo/docs/ wiki_repo/  # Sync files from 'main_repo/docs/' to 'wiki_repo/'
+        rsync -av --delete --exclude='.git' main_repo/docs/ wiki_repo/  # Sync files from 'main_repo/docs/' to 'wiki_repo/'
 
     # Step 4: Setup git author and mail
     - name: Configure Git author
