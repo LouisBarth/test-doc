@@ -10,31 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Check out the main repository (into subfolder)
     - name: Check out repository
       uses: actions/checkout@v3
       with:
+        path: main_repo             # Checkout main repository in a subfolder
         fetch-depth: 0
 
-    - name: Set up Node.js (if needed)
-      uses: actions/setup-node@v3
+    # Step 2: Check out the Wiki repository in a separate folder
+    - name: Check out the Wiki repository
+      uses: actions/checkout@v3
       with:
-        node-version: '14'
+        repository: ${{ github.repository }}.wiki # Specifies the wiki repo
+        token: ${{ secrets.GH_TOKEN }}            # Use the PAT to authenticate
+        path: wiki_repo                           # Checkout the wiki repository to 'wiki_repo' folder
 
-    - name: Copy docs to Wiki directory
+    # Step 3: Copy files from the /docs folder in main repository to wiki repository
+    - name: Sync /docs folder to Wiki repository
       run: |
-        rm -rf wiki
-        git clone "https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
-        rsync -av --delete docs/ wiki/ # Syncs all files from /docs to the wiki directory
+        rsync -av --delete main_repo/docs/ wiki_repo/  # Sync files from 'main_repo/docs/' to 'wiki_repo/'
 
+    # Step 4: Setup git author and mail
     - name: Configure Git author
       run: |
-        cd wiki
+        cd wiki_repo
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git config user.name "GitHub Actions Bot"
 
+    # Step 5: Commit files and push the wiki repository
     - name: Commit and push changes
       run: |
-        cd wiki
+        cd wiki_repo
         git add .
         git commit -m "Update Wiki from /docs folder"
         git push origin main
