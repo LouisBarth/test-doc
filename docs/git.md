@@ -23,17 +23,21 @@ This document outlines the best practices and standardized process for using Git
 - **Linux**: `sudo apt install git`
 
 ### Initial Configuration
+Basic setup :
 ```bash
 git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
+git config --global user.email "your.email@manda.fr"
+```
+Optionnal (for VSCode): 
+```bash
 git config --global core.editor "code --wait"
-git config --global init.defaultBranch main
-
 ```
 
 ## Git Workflow
 [comment]: # (Trust me, the line below works on Github wiki pages !)
-[[/assets/workflow.png|Git workflow]]
+[[/Git/workflow.png|Git workflow]]
+and
+![Example of interactive rebase](Git/workflow.png)
 
 ### 0. Update local
 Update your local main branch for the project.
