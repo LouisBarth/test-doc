@@ -35,9 +35,11 @@ git config --global core.editor "code --wait"
 
 ## Git Workflow
 [comment]: # (Trust me, the line below works on Github wiki pages !)
+test
 [[/Git/workflow.png|Git workflow]]
 and
 ![Example of interactive rebase](Git/workflow.png)
+end
 
 ### 0. Update local
 Update your local main branch for the project.
